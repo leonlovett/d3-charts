@@ -1,11 +1,22 @@
-.container {
+@media screen and (max-width: 1399px) {
+  .container {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-auto-rows: 1fr;
+  }
+}
+
+@media screen and (min-width: 1400px) {
+  .container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-auto-rows: 1fr;
+  }
 }
 
+
 app-toolbar {
-    position: sticky;
-    top: 0;
-    left: 0;
+  position: sticky;
+  top: 0;
+  left: 0;
 }
