@@ -133,7 +133,7 @@ export class EmployeeCountryComponent implements AfterViewInit {
   }
 
   async ngAfterViewInit() {
-    this.elementWidth.next(this.genderCard.nativeElement.offsetWidth - 112);
+    this.elementWidth.next(this.genderCard.nativeElement.offsetWidth - 35);
     this.elementHeight.next(this.genderCard.nativeElement.offsetWidth * .6);
   }
 
