@@ -9,8 +9,6 @@ import { StoreService } from "./store.service";
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = 'charts';
-  employees: Array<any>;
 
   constructor(
     private readonly dataService: DataService,

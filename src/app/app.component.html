@@ -1,3 +1,4 @@
+<app-loading *ngIf="(store.employeesLoaded | async) === false"></app-loading>
 <app-toolbar></app-toolbar>
 <div class="container">
   <app-employee-gender></app-employee-gender>

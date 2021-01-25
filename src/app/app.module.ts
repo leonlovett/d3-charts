@@ -7,6 +7,7 @@ import { MatIconModule } from "@angular/material/icon";
 import { MatButtonModule } from "@angular/material/button";
 import { MatCardModule } from "@angular/material/card";
 import { MatTableModule } from "@angular/material/table";
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,13 +16,15 @@ import { EmployeeGenderComponent } from './components/employee-gender/employee-g
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { EmployeeCountryComponent } from './components/employee-country/employee-country.component';
 import { EmployeeTableComponent } from './components/employee-table/employee-table.component';
+import { LoadingComponent } from './components/loading/loading.component';
 
 const matModules = [
   MatToolbarModule,
   MatIconModule,
   MatButtonModule,
   MatCardModule,
-  MatTableModule
+  MatTableModule,
+  MatProgressSpinnerModule
 ];
 
 @NgModule({
@@ -30,7 +33,8 @@ const matModules = [
     EmployeeGenderComponent,
     ToolbarComponent,
     EmployeeCountryComponent,
-    EmployeeTableComponent
+    EmployeeTableComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,
