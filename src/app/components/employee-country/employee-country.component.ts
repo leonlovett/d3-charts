@@ -96,7 +96,7 @@ export class EmployeeCountryComponent implements AfterViewInit {
       sel.on('mouseover', (evt, d) => {
         this.tooltip
           .style('opacity', 1)
-          .html(`<span>There are ${d.count} employees in ${d.country}.</span>`)
+          .html(this.getTooltipText(d))
           .style('position', 'absolute')
           .style('background', '#ff4081')
           .style('width', '100px')
@@ -126,6 +126,12 @@ export class EmployeeCountryComponent implements AfterViewInit {
     //   .attr('text-anchor', 'end')
     //   .attr('dy', d => y(d.country) + y.bandwidth() / 2)
     //   .attr('dx', d => x(d.count))
+  }
+
+  getTooltipText(data) {
+    const areIs = data.count === 1 ? 'is' : 'are';
+    const employeesLang = data.count === 1 ? 'employee' : 'employees'
+    return `<span>There ${areIs} ${data.count} ${employeesLang} in ${data.country}.</span>`
   }
 
   async ngAfterViewInit() {
