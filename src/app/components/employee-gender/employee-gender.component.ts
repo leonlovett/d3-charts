@@ -18,6 +18,7 @@ export class EmployeeGenderComponent implements AfterViewInit {
   padding: number = 35;
   elementWidth: Subject<number> = new Subject();
   elementHeight: Subject<number> = new Subject();
+  data: Array<any> = [];
 
   domain: Array<any>;
   tooltip = d3.select('body')
@@ -35,6 +36,9 @@ export class EmployeeGenderComponent implements AfterViewInit {
     this.elementHeight.subscribe(height => this.height = height);
     this.store.employeesLoaded.subscribe(resp => {
       if (resp === true) {
+        this.data = this.store.employeesByGender.sort((a, b) => {
+          return d3.descending(a.count, b.count);
+        })
         this.createSvg();
         this.drawBars();
       }
@@ -53,7 +57,7 @@ export class EmployeeGenderComponent implements AfterViewInit {
     // Create the X-axis band scale
     const x = d3.scaleBand()
       .range([0, this.width - 35])
-      .domain(this.store.genderDomain)
+      .domain(this.data.map(x => x.gender))
       .padding(0.3);
 
     // Draw the X-axis on the DOM
@@ -75,7 +79,7 @@ export class EmployeeGenderComponent implements AfterViewInit {
 
     // Create and fill the bars
     const sel = this.svg.selectAll("bars")
-      .data(this.store.employeesByGender)
+      .data(this.data)
       .enter()
       .append("rect")
       .attr("x", d => x(d.gender))
@@ -88,35 +92,13 @@ export class EmployeeGenderComponent implements AfterViewInit {
       .transition()
       .duration(1000)
       .attr("fill", d => d.gender === 'male' ? "#3f51b5" : "#ff4081")
-      // .on('mouseenter', (evt, d) => {
-      //   this.tooltip
-      //     .style('opacity', 1)
-      //     .html(`<span>There are ${d.count} ${d.gender} employees.</span>`)
-      //     .style('position', 'absolute')
-      //     .style('background', 'red')
-      //     .style('width', '100px')
-      //     .style('left', (evt.pageX - 50) + 'px')
-      //     .style('top', (evt.pageY - 60) + 'px')
-      //     .style('pointer-events', 'none')
-      //     .style('border-radius', '10px')
-      //     .style('display', 'flex')
-      //     .style('justify-content', 'center')
-      //     .style('align-items', 'center')
-      //     .style('text-align', 'center')
-      //     .style('color', 'white')
-      //     .style('padding', '5px')
-      // })
-      // .on('mouseout', () => {
-      //   this.tooltip
-      //     .style('opacity', '0');
-      // })
 
     this.svg.selectAll("bars")
     .data(this.store.employeesByGender)
     .enter()
     .append('text')
     .style("fill", "white")
-    .style('font-size', '40px')
+    .style('font-size', '2.5rem')
     .text(d => d.count)
     .attr('text-anchor', 'middle')
     .attr('dominant-baseline', 'hanging')

@@ -15,7 +15,7 @@ export class StoreService {
   employeesByCountry: Array<any>;
 
   getGenderDomain() {
-    this.genderDomain = this._employees.map(employee => employee.gender);
+    this.genderDomain = this.employeesByGender.map(employee => employee.gender);
   }
 
   getGenderWinnerCount() {
