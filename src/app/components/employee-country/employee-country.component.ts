@@ -39,7 +39,6 @@ export class EmployeeCountryComponent implements AfterViewInit {
         this.data = this.store.employeesByCountry.sort((a, b) => {
           return d3.descending(a.count, b.count);
         });
-        console.log(this.data);
         this.createSvg();
         this.drawBars();
       }

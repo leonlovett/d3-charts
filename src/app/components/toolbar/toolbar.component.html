@@ -1,8 +1,13 @@
 <mat-toolbar color="primary">
-    <button mat-icon-button color="accent">
-        <mat-icon>insights</mat-icon>
-    </button>
-    <span>Employees Dashboard</span>
-    <div class="spacer"></div>
-    <span>{{ store.getEmployees().length.toLocaleString() }} total employees</span>
+    <mat-toolbar-row>
+        <button mat-icon-button color="accent">
+            <mat-icon>insights</mat-icon>
+        </button>
+        <span>Employee Dashboard</span>
+        <div class="spacer" *ngIf="width > 550"></div>
+        <span *ngIf="width > 550">{{ store.getEmployees().length.toLocaleString() }} total employees</span>    
+    </mat-toolbar-row>
+    <mat-toolbar-row *ngIf="width < 551">
+        <span>{{ store.getEmployees().length.toLocaleString() }} total employees</span>    
+    </mat-toolbar-row>
 </mat-toolbar>

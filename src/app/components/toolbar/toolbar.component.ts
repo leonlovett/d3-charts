@@ -9,11 +9,14 @@ import { StoreService } from "../../store.service";
 })
 export class ToolbarComponent implements OnInit {
 
+  width: number;
+
   constructor(
     readonly store: StoreService
   ) { }
 
   ngOnInit(): void {
+    this.width = window.innerWidth;
   }
 
 }
