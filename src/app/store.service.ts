@@ -23,7 +23,7 @@ export class StoreService {
   }
 
   getCountryDomain() {
-    this.countryDomain = this._employees.map(employee => employee.location.country);
+    this.countryDomain = this.employeesByCountry.map(employee => employee.country);
   }
 
   getCountryWinnerCount() {
@@ -83,6 +83,12 @@ export class StoreService {
         country: item[0],
         count: item[1]['length']
       }
+    });
+  }
+
+  get employeesByCountrySorted() {
+    return this.employeesByCountry.sort((a, b) => {
+      return b.count - a.count;
     });
   }
 

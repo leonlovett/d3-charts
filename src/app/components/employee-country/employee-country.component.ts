@@ -18,6 +18,7 @@ export class EmployeeCountryComponent implements AfterViewInit {
   padding: number = 35;
   elementWidth: Subject<number> = new Subject();
   elementHeight: Subject<number> = new Subject();
+  data: Array<any> = [];
 
   domain: Array<any>;
   tooltip = d3.select('body')
@@ -35,6 +36,10 @@ export class EmployeeCountryComponent implements AfterViewInit {
     this.elementHeight.subscribe(height => this.height = height);
     this.store.employeesLoaded.subscribe(resp => {
       if (resp === true) {
+        this.data = this.store.employeesByCountry.sort((a, b) => {
+          return d3.descending(a.count, b.count);
+        });
+        console.log(this.data);
         this.createSvg();
         this.drawBars();
       }
@@ -54,7 +59,7 @@ export class EmployeeCountryComponent implements AfterViewInit {
     const y = d3.scaleBand()
       .range([0, this.height - 35])
       .padding(0.15)
-      .domain(this.store.countryDomain)
+      .domain(this.data.map(x => x.country))
     // Draw the Y-axis on the DOM
     this.svg.append("g")
       .call(d3.axisLeft(y))
@@ -74,7 +79,7 @@ export class EmployeeCountryComponent implements AfterViewInit {
 
     // Create and fill the bars
     const sel = this.svg.selectAll("bars")
-      .data(this.store.employeesByCountry)
+      .data(this.data)
       .enter()
       .append("rect")
       .attr("x", 1)
@@ -122,14 +127,6 @@ export class EmployeeCountryComponent implements AfterViewInit {
     //   .attr('text-anchor', 'end')
     //   .attr('dy', d => y(d.country) + y.bandwidth() / 2)
     //   .attr('dx', d => x(d.count))
-  }
-
-  sortData() {
-    const ebc = this.store.employeesByCountry.sort((a, b) => {
-      return b.count - a.count;
-    });
-
-    this.store.setEmployeesByCountry(ebc);
   }
 
   async ngAfterViewInit() {
