@@ -98,7 +98,7 @@ export class EmployeeCountryComponent implements AfterViewInit {
           .style('opacity', 1)
           .html(`<span>There are ${d.count} employees in ${d.country}.</span>`)
           .style('position', 'absolute')
-          .style('background', 'red')
+          .style('background', '#ff4081')
           .style('width', '100px')
           .style('left', (evt.pageX - 50) + 'px')
           .style('top', (evt.pageY - 60) + 'px')
